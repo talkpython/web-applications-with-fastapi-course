@@ -1,6 +1,7 @@
 import fastapi
 import fastapi_chameleon
 import uvicorn
+from starlette.staticfiles import StaticFiles
 
 from views import account
 from views import home
@@ -24,6 +25,7 @@ def configure_templates():
 
 
 def configure_routes():
+    app.mount('/static', StaticFiles(directory='static'), name='static')
     app.include_router(home.router)
     app.include_router(account.router)
     app.include_router(packages.router)
