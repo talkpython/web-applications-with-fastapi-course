@@ -27,7 +27,7 @@ def register(request: Request):
 @router.post('/account/register')
 @template()
 def register(request: Request):
-    print("POST REGISTER")
+    print("POST REGISTER") # TODO: Implement data exchange
     vm = RegisterViewModel(request)
     return vm.to_dict()
 
