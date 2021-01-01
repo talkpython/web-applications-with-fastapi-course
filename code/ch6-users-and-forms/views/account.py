@@ -10,18 +10,30 @@ router = fastapi.APIRouter()
 
 
 @router.get('/account')
+@template()
 def index(request: Request):
     vm = AccountViewModel(request)
     return vm.to_dict()
 
 
 @router.get('/account/register')
+@template()
 def register(request: Request):
+    print("GET REGISTER")
+    vm = RegisterViewModel(request)
+    return vm.to_dict()
+
+
+@router.post('/account/register')
+@template()
+def register(request: Request):
+    print("POST REGISTER")
     vm = RegisterViewModel(request)
     return vm.to_dict()
 
 
 @router.get('/account/login')
+@template()
 def login(request: Request):
     vm = LoginViewModel(request)
     return vm.to_dict()
