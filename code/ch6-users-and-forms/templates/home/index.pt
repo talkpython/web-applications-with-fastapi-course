@@ -1,0 +1,55 @@
+<div metal:use-macro="load: ../shared/_layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+
+        <div class="content">
+
+            <div class="hero">
+                <div class="hero-inner">
+                    <h1>
+                        Find, install and publish Python packages <br>
+                        with the Python Package Index
+                    </h1>
+
+                    <input type="text" class="form-control"
+                           placeholder=" Search projects">
+
+                    <br>
+                    <br>
+                    <br>
+                    Or <a href="#">browse projects</a>
+                </div>
+            </div>
+
+            <div class="pypi-stats">
+                <div class="stat">${'{:,}'.format(package_count)} projects</div>
+                <div class="stat">${'{:,}'.format(release_count)} releases</div>
+                <div class="stat">${'{:,}'.format(user_count)} users</div>
+            </div>
+
+            <div class="container project-list">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+
+                        <h2>New releases</h2>
+                        <span class="subtitle">Hot off the press: the newest project releases</span>
+
+
+                        <div class="project" tal:repeat="p packages">
+                            <div class="title"><a href="/project/${p.id}">${p.id}</a></div>
+                            <div class="desc">${p.summary}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div metal:fill-slot="additional-css" tal:omit-tag="True">
+        <!-- additional css from the page -->
+    </div>
+</div>
