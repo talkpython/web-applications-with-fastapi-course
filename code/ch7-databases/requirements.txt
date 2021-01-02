@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+aiofiles
+python-multipart
+
+git+https://github.com/mikeckennedy/fastapi-chameleon
+
+starlette
