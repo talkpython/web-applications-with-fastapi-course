@@ -1,3 +1,5 @@
+import asyncio
+
 import fastapi
 from fastapi_chameleon import template
 from starlette import status
@@ -37,7 +39,7 @@ async def register(request: Request):
         return vm.to_dict()
 
     # Create the account
-    account = user_service.create_account(vm.name, vm.email, vm.password)
+    account = await user_service.create_account(vm.name, vm.email, vm.password)
 
     # Login user
     response = fastapi.responses.RedirectResponse(url='/account', status_code=status.HTTP_302_FOUND)
@@ -65,8 +67,9 @@ async def login_post(request: Request):
     if vm.error:
         return vm.to_dict()
 
-    user = user_service.login_user(vm.email, vm.password)
+    user = await user_service.login_user(vm.email, vm.password)
     if not user:
+        await asyncio.sleep(5)
         vm.error = "The account does not exist or the password is wrong."
         return vm.to_dict()
 

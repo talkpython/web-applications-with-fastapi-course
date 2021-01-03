@@ -15,28 +15,25 @@ async def user_count() -> int:
         return result.scalar()
 
 
-def create_account(name: str, email: str, password: str) -> User:
-    session = db_session.create_session()
+async def create_account(name: str, email: str, password: str) -> User:
+    user = User()
+    user.email = email
+    user.name = name
+    user.hash_password = crypto.hash(password, rounds=172_434)
 
-    try:
-        user = User()
-        user.email = email
-        user.name = name
-        user.hash_password = crypto.hash(password, rounds=172_434)
-
+    async with db_session.create_async_session() as session:
         session.add(user)
-        session.commit()
+        await session.commit()
 
-        return user
-    finally:
-        session.close()
+    return user
 
 
-def login_user(email: str, password: str) -> Optional[User]:
-    session = db_session.create_session()
+async def login_user(email: str, password: str) -> Optional[User]:
+    async with db_session.create_async_session() as session:
+        query = select(User).filter(User.email == email)
+        results = await session.execute(query)
 
-    try:
-        user = session.query(User).filter(User.email == email).first()
+        user = results.scalar_one_or_none()
         if not user:
             return user
 
@@ -44,8 +41,6 @@ def login_user(email: str, password: str) -> Optional[User]:
             return None
 
         return user
-    finally:
-        session.close()
 
 
 async def get_user_by_id(user_id: int) -> Optional[User]:
