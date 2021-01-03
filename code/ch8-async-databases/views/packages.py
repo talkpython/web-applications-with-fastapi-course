@@ -9,6 +9,8 @@ router = fastapi.APIRouter()
 
 @router.get('/project/{package_name}')
 @template(template_file='packages/details.pt')
-def details(package_name: str, request: Request):
+async def details(package_name: str, request: Request):
     vm = DetailsViewModel(package_name, request)
+    await vm.load()
+
     return vm.to_dict()
