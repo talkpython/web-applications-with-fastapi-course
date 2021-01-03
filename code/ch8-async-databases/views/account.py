@@ -14,8 +14,9 @@ router = fastapi.APIRouter()
 
 @router.get('/account')
 @template()
-def index(request: Request):
+async def index(request: Request):
     vm = AccountViewModel(request)
+    await vm.load()
     return vm.to_dict()
 
 
