@@ -10,7 +10,7 @@ from views import account
 from views import home
 from views import packages
 
-app = fastapi.FastAPI()
+app = fastapi.FastAPI()  # docs_url=None, redoc_url=None)
 
 
 def main():
