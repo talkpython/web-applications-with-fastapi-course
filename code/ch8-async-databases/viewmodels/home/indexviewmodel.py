@@ -14,7 +14,7 @@ class IndexViewModel(ViewModelBase):
         self.release_count: int = 0
         self.user_count: int = 0
         self.package_count: int = 0
-        self.packages: List = [Package]
+        self.packages: List[Package] = []
 
     async def load(self):
         self.release_count: int = await package_service.release_count()
