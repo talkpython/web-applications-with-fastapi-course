@@ -24,14 +24,20 @@ def global_init(db_file: str):
     folder = Path(db_file).parent
     folder.mkdir(parents=True, exist_ok=True)
 
-    conn_str = 'sqlite:///' + db_file.strip()
-    print("Connecting to DB with {}".format(conn_str))
+    # Post-recording update:
+    # SQLAlchemy started enforcing the underlying Python DB API was truly async
+    # We don't really get that with SQLite but when you switch something like Postgres
+    # It would "light up" with async. Since recording, SQLAlchemy throws and error
+    # if this would be the case. We need to explicitly switch to aiosqlite as below.
+    conn_str = 'sqlite+pysqlite:///' + db_file.strip()
+    async_conn_str = 'sqlite+aiosqlite:///' + db_file.strip()
+    print("Connecting to DB with {}".format(async_conn_str))
 
     # Adding check_same_thread = False after the recording. This can be an issue about
     # creating / owner thread when cleaning up sessions, etc. This is a sqlite restriction
     # that we probably don't care about in this example.
     engine = sa.create_engine(conn_str, echo=False, connect_args={"check_same_thread": False})
-    __async_engine = create_async_engine(conn_str, echo=False, connect_args={"check_same_thread": False})
+    __async_engine = create_async_engine(async_conn_str, echo=False, connect_args={"check_same_thread": False})
     __factory = orm.sessionmaker(bind=engine)
 
     # noinspection PyUnresolvedReferences

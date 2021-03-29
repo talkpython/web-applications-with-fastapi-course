@@ -6,9 +6,18 @@ python-multipart
 git+https://github.com/mikeckennedy/fastapi-chameleon
 
 starlette==0.13.6
-SQLAlchemy==1.4.0b1
 progressbar2
 python-dateutil
 passlib
+
+# Post-recording updates:
+# SQLAlchemy is out of beta for 1.4+:
+SQLAlchemy>=1.4.3
+
+# SQLAlchemy started enforcing the underlying Python DB API was truly async
+# We don't really get that with SQLite but when you switch something like Postgres
+# It would "light up" with async. Since recording, SQLAlchemy throws and error
+# if this would be the case. We need to explicitly switch to aiosqlite.
+aiosqlite>=0.17.0
 
 

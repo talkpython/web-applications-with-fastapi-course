@@ -37,7 +37,10 @@ async def login_user(email: str, password: str) -> Optional[User]:
         if not user:
             return user
 
-        if not crypto.verify(password, user.hash_password):
+        try:
+            if not crypto.verify(password, user.hash_password):
+                return None
+        except ValueError:
             return None
 
         return user
