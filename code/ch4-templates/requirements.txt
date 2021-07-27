@@ -2,6 +2,7 @@ fastapi
 uvicorn
 aiofiles
 
-git+https://github.com/mikeckennedy/fastapi-chameleon
+# This is now available on PyPI.org so we'll be using that one going forward.
+fastapi-chameleon
 
 starlette

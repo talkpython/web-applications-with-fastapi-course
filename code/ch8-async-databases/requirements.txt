@@ -3,7 +3,8 @@ uvicorn==0.13.3
 aiofiles
 python-multipart
 
-git+https://github.com/mikeckennedy/fastapi-chameleon
+# This is now available on PyPI.org, so we'll be using that one going forward.
+fastapi-chameleon
 
 starlette==0.13.6
 progressbar2
