@@ -12,4 +12,5 @@ def index():
 
 
 if __name__ == '__main__':
+    # noinspection PyTypeChecker
     uvicorn.run(app)
