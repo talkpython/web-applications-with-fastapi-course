@@ -26,7 +26,7 @@ class Package(SqlAlchemyBase):
     license: str = sa.Column(sa.String, index=True)
 
     # releases relationship
-    releases: List[Release] = orm.relation("Release", order_by=[
+    releases: List[Release] = orm.relationship("Release", order_by=[
         Release.major_ver.desc(),
         Release.minor_ver.desc(),
         Release.build_ver.desc(),
