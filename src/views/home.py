@@ -3,6 +3,7 @@ from fastapi_chameleon import template
 from starlette.requests import Request
 
 from viewmodels.home.indexviewmodel import IndexViewModel
+from viewmodels.shared.viewmodel import ViewModelBase
 
 router = fastapi.APIRouter()
 
@@ -16,5 +17,7 @@ def index(request: Request):
 
 @router.get('/about')
 @template()
-def about():
+def about(request: Request):
+    vm = ViewModelBase(request)
+    # TODO: Use the vm
     return {}
