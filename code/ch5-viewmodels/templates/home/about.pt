@@ -1,0 +1,7 @@
+<div metal:use-macro="load: ../shared/_layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+
+        <div>About pypi</div>
+
+    </div>
+</div>
