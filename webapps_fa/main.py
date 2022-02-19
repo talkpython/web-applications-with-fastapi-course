@@ -6,9 +6,10 @@ app = fastapi.FastAPI()
 
 @app.get('/')
 def index():
-    return {
-        'message': "Hello world"
-    }
+    content = """
+    <h1>Hello FastApi</h1>
+    """
+    return fastapi.responses.HTMLResponse(content)
 
 
 if __name__ == '__main__':
