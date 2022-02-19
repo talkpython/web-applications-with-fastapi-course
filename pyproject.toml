@@ -8,6 +8,7 @@ authors = ["Andrei Horbach <andrewhorbach@gmail.com>"]
 python = "^3.10"
 fastapi = "^0.74.0"
 uvicorn = "^0.17.5"
+fastapi-chameleon = "^0.1.12"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
