@@ -9,7 +9,7 @@ class User(SqlAlchemyBase):
     name: str = sa.Column(sa.String)
     email: str = sa.Column(sa.String, index=True, unique=True)
     hash_password: str = sa.Column(sa.String)
-    created_dat: datetime.datetime = sa.Column(sa.DateTime, default=datetime.datetime.now, index=True)
+    created_date: datetime.datetime = sa.Column(sa.DateTime, default=datetime.datetime.now, index=True)
     last_login: datetime.datetime = sa.Column(sa.DateTime, default=datetime.datetime.now, index=True)
     profile_image_url: str = sa.Column(sa.String)
     
