@@ -4,7 +4,6 @@ from starlette.requests import Request
 
 
 class ViewModelBase:
-
     def __init__(self, request: Request):
         self.request: Request = request
         self.error: Optional[str] = None

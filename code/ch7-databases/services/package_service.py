@@ -29,13 +29,13 @@ def latest_packages(limit: int = 5) -> List[Package]:
     session = db_session.create_session()
 
     try:
-        releases = session.query(Release) \
-            .options(
-            sqlalchemy.orm.joinedload(Release.package)
-        ) \
-            .order_by(Release.created_date.desc()) \
-            .limit(limit) \
+        releases = (
+            session.query(Release)
+            .options(sqlalchemy.orm.joinedload(Release.package))
+            .order_by(Release.created_date.desc())
+            .limit(limit)
             .all()
+        )
     finally:
         session.close()
 
@@ -56,10 +56,12 @@ def get_latest_release_for_package(package_name: str) -> Optional[Release]:
     session = db_session.create_session()
 
     try:
-        release = session.query(Release) \
-            .filter(Release.package_id == package_name) \
-            .order_by(Release.created_date.desc()) \
+        release = (
+            session.query(Release)
+            .filter(Release.package_id == package_name)
+            .order_by(Release.created_date.desc())
             .first()
+        )
 
         return release
     finally:

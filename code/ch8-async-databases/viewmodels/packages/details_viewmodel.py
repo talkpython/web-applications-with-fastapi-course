@@ -22,10 +22,12 @@ class DetailsViewModel(ViewModelBase):
 
     async def load(self):
         self.package = await package_service.get_package_by_id(self.package_name)
-        self.latest_release = await package_service.get_latest_release_for_package(self.package_name)
+        self.latest_release = await package_service.get_latest_release_for_package(
+            self.package_name
+        )
 
         if not self.package or not self.latest_release:
             return
 
         r = self.latest_release
-        self.latest_version = f'{r.major_ver}.{r.minor_ver}.{r.build_ver}'
+        self.latest_version = f"{r.major_ver}.{r.minor_ver}.{r.build_ver}"

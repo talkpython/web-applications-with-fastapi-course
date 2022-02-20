@@ -22,13 +22,15 @@ def global_init(db_file: str):
     folder = Path(db_file).parent
     folder.mkdir(parents=True, exist_ok=True)
 
-    conn_str = 'sqlite:///' + db_file.strip()
+    conn_str = "sqlite:///" + db_file.strip()
     print("Connecting to DB with {}".format(conn_str))
 
     # Adding check_same_thread = False after the recording. This can be an issue about
     # creating / owner thread when cleaning up sessions, etc. This is a sqlite restriction
     # that we probably don't care about in this example.
-    engine = sa.create_engine(conn_str, echo=False, connect_args={"check_same_thread": False})
+    engine = sa.create_engine(
+        conn_str, echo=False, connect_args={"check_same_thread": False}
+    )
     __factory = orm.sessionmaker(bind=engine)
 
     # noinspection PyUnresolvedReferences
@@ -47,4 +49,3 @@ def create_session() -> Session:
     session.expire_on_commit = False
 
     return session
-

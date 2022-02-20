@@ -8,11 +8,15 @@ from data.release import Release
 
 
 class Package(SqlAlchemyBase):
-    __tablename__ = 'packages'
+    __tablename__ = "packages"
 
     id: str = sa.Column(sa.String, primary_key=True)
-    created_date: datetime.datetime = sa.Column(sa.DateTime, default=datetime.datetime.now, index=True)
-    last_updated: datetime.datetime = sa.Column(sa.DateTime, default=datetime.datetime.now, index=True)
+    created_date: datetime.datetime = sa.Column(
+        sa.DateTime, default=datetime.datetime.now, index=True
+    )
+    last_updated: datetime.datetime = sa.Column(
+        sa.DateTime, default=datetime.datetime.now, index=True
+    )
     summary: str = sa.Column(sa.String, nullable=False)
     description: str = sa.Column(sa.String, nullable=True)
 
@@ -26,14 +30,18 @@ class Package(SqlAlchemyBase):
     license: str = sa.Column(sa.String, index=True)
 
     # releases relationship
-    releases: List[Release] = orm.relationship("Release", order_by=[
-        Release.major_ver.desc(),
-        Release.minor_ver.desc(),
-        Release.build_ver.desc(),
-    ], back_populates='package')
+    releases: List[Release] = orm.relationship(
+        "Release",
+        order_by=[
+            Release.major_ver.desc(),
+            Release.minor_ver.desc(),
+            Release.build_ver.desc(),
+        ],
+        back_populates="package",
+    )
 
     def __repr__(self):
-        return '<Package {}>'.format(self.id)
+        return "<Package {}>".format(self.id)
 
 
 # p = Package()  # one query

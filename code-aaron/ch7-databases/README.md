@@ -1,0 +1,1 @@
+python3 -m uvicorn main:app --port 8020 --reload

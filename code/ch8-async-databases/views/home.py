@@ -8,7 +8,7 @@ from viewmodels.shared.viewmodel import ViewModelBase
 router = fastapi.APIRouter()
 
 
-@router.get('/')
+@router.get("/")
 @template()
 async def index(request: Request):
     vm = IndexViewModel(request)
@@ -16,7 +16,7 @@ async def index(request: Request):
     return vm.to_dict()
 
 
-@router.get('/about')
+@router.get("/about")
 @template()
 def about(request: Request):
     vm = ViewModelBase(request)

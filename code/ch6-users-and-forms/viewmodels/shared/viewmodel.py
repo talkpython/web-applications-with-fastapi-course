@@ -6,7 +6,6 @@ from infrastructure import cookie_auth
 
 
 class ViewModelBase:
-
     def __init__(self, request: Request):
         self.request: Request = request
         self.error: Optional[str] = None

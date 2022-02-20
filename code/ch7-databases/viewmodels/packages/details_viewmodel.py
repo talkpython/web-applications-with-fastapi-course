@@ -14,7 +14,9 @@ class DetailsViewModel(ViewModelBase):
 
         self.package_name = package_name
         self.package = package_service.get_package_by_id(package_name)
-        self.latest_release = package_service.get_latest_release_for_package(package_name)
+        self.latest_release = package_service.get_latest_release_for_package(
+            package_name
+        )
         self.latest_version = "0.0.0"
         self.is_latest = True
         self.maintainers = []
@@ -23,6 +25,5 @@ class DetailsViewModel(ViewModelBase):
             return
 
         r = self.latest_release
-        self.latest_version = f'{r.major_ver}.{r.minor_ver}.{r.build_ver}'
+        self.latest_version = f"{r.major_ver}.{r.minor_ver}.{r.build_ver}"
         self.maintainers = []
-

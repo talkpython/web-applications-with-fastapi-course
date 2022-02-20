@@ -12,21 +12,21 @@ from viewmodels.account.register_viewmodel import RegisterViewModel
 router = fastapi.APIRouter()
 
 
-@router.get('/account')
+@router.get("/account")
 @template()
 def index(request: Request):
     vm = AccountViewModel(request)
     return vm.to_dict()
 
 
-@router.get('/account/register')
+@router.get("/account/register")
 @template()
 def register(request: Request):
     vm = RegisterViewModel(request)
     return vm.to_dict()
 
 
-@router.post('/account/register')
+@router.post("/account/register")
 @template()
 async def register(request: Request):
     vm = RegisterViewModel(request)
@@ -39,7 +39,9 @@ async def register(request: Request):
     account = user_service.create_account(vm.name, vm.email, vm.password)
 
     # Login user
-    response = fastapi.responses.RedirectResponse(url='/account', status_code=status.HTTP_302_FOUND)
+    response = fastapi.responses.RedirectResponse(
+        url="/account", status_code=status.HTTP_302_FOUND
+    )
     cookie_auth.set_auth(response, account.id)
 
     return response
@@ -47,15 +49,16 @@ async def register(request: Request):
 
 # ################### LOGIN #################################
 
-@router.get('/account/login')
-@template(template_file='account/login.pt')
+
+@router.get("/account/login")
+@template(template_file="account/login.pt")
 def login_get(request: Request):
     vm = LoginViewModel(request)
     return vm.to_dict()
 
 
-@router.post('/account/login')
-@template(template_file='account/login.pt')
+@router.post("/account/login")
+@template(template_file="account/login.pt")
 async def login_post(request: Request):
 
     vm = LoginViewModel(request)
@@ -69,15 +72,19 @@ async def login_post(request: Request):
         vm.error = "The account does not exist or the password is wrong."
         return vm.to_dict()
 
-    resp = fastapi.responses.RedirectResponse('/account', status_code=status.HTTP_302_FOUND)
+    resp = fastapi.responses.RedirectResponse(
+        "/account", status_code=status.HTTP_302_FOUND
+    )
     cookie_auth.set_auth(resp, user.id)
 
     return resp
 
 
-@router.get('/account/logout')
+@router.get("/account/logout")
 def logout():
-    response = fastapi.responses.RedirectResponse(url='/', status_code=status.HTTP_302_FOUND)
+    response = fastapi.responses.RedirectResponse(
+        url="/", status_code=status.HTTP_302_FOUND
+    )
     cookie_auth.logout(response)
 
     return response

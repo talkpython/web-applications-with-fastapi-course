@@ -9,24 +9,24 @@ from viewmodels.account.register_viewmodel import RegisterViewModel
 router = fastapi.APIRouter()
 
 
-@router.get('/account')
+@router.get("/account")
 def index(request: Request):
     vm = AccountViewModel(request)
     return vm.to_dict()
 
 
-@router.get('/account/register')
+@router.get("/account/register")
 def register(request: Request):
     vm = RegisterViewModel(request)
     return vm.to_dict()
 
 
-@router.get('/account/login')
+@router.get("/account/login")
 def login(request: Request):
     vm = LoginViewModel(request)
     return vm.to_dict()
 
 
-@router.get('/account/logout')
+@router.get("/account/logout")
 def logout(request: Request):
     return {}
