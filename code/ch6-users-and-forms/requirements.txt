@@ -1,9 +1,0 @@
-fastapi==0.70.0
-uvicorn==0.15.0
-aiofiles
-python-multipart
-
-# This is now available on PyPI.org, so we'll be using that one going forward.
-fastapi-chameleon==0.1.12
-
-starlette==0.16.0
