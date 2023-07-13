@@ -1,6 +1,5 @@
-from starlette.requests import Request
-
 from data.user import User
+from starlette.requests import Request
 from viewmodels.shared.viewmodel import ViewModelBase
 
 

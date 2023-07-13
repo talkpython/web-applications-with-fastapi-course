@@ -3,10 +3,9 @@ from typing import Callable, Optional
 
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
+from data.modelbase import SqlAlchemyBase
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine, AsyncSession
 from sqlalchemy.orm import Session
-
-from data.modelbase import SqlAlchemyBase
 
 __factory: Optional[Callable[[], Session]] = None
 __async_engine: Optional[AsyncEngine] = None

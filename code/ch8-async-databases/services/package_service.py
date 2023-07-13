@@ -1,12 +1,12 @@
 from typing import List, Optional
 
 import sqlalchemy.orm
+from data.package import Package
+from data.release import Release
 from sqlalchemy import func
 from sqlalchemy.future import select
 
 from data import db_session
-from data.package import Package
-from data.release import Release
 
 
 async def release_count() -> int:

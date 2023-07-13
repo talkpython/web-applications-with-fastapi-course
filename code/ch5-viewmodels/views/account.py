@@ -1,5 +1,4 @@
 import fastapi
-from fastapi_chameleon import template
 from starlette.requests import Request
 
 from viewmodels.account.account_viewmodel import AccountViewModel

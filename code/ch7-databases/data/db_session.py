@@ -3,9 +3,8 @@ from typing import Callable, Optional
 
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
-from sqlalchemy.orm import Session
-
 from data.modelbase import SqlAlchemyBase
+from sqlalchemy.orm import Session
 
 __factory: Optional[Callable[[], Session]] = None
 
@@ -47,4 +46,3 @@ def create_session() -> Session:
     session.expire_on_commit = False
 
     return session
-

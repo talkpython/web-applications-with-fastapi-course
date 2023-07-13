@@ -1,8 +1,7 @@
 from typing import Optional
 
-from starlette.requests import Request
-
 from services import user_service
+from starlette.requests import Request
 from viewmodels.shared.viewmodel import ViewModelBase
 
 

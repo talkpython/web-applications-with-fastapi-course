@@ -1,11 +1,11 @@
 from typing import Optional
 
+from data.user import User
 from passlib.handlers.sha2_crypt import sha512_crypt as crypto
 from sqlalchemy import func
 from sqlalchemy.future import select
 
 from data import db_session
-from data.user import User
 
 
 async def user_count() -> int:

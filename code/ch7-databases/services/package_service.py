@@ -1,10 +1,10 @@
 from typing import List, Optional
 
 import sqlalchemy.orm
-
-from data import db_session
 from data.package import Package
 from data.release import Release
+
+from data import db_session
 
 
 def release_count() -> int:

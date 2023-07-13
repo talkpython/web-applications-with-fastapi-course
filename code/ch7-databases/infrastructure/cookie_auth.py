@@ -3,7 +3,6 @@ from typing import Optional
 
 from fastapi import Request
 from fastapi import Response
-
 from infrastructure.num_convert import try_int
 
 auth_cookie_name = 'pypi_account'

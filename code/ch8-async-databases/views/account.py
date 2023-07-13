@@ -2,11 +2,10 @@ import asyncio
 
 import fastapi
 from fastapi_chameleon import template
-from starlette import status
-from starlette.requests import Request
-
 from infrastructure import cookie_auth
 from services import user_service
+from starlette import status
+from starlette.requests import Request
 from viewmodels.account.account_viewmodel import AccountViewModel
 from viewmodels.account.login_viewmodel import LoginViewModel
 from viewmodels.account.register_viewmodel import RegisterViewModel

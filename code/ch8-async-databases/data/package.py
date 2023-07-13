@@ -38,7 +38,6 @@ class Package(SqlAlchemyBase):
     def __repr__(self):
         return '<Package {}>'.format(self.id)
 
-
 # p = Package()  # one query
 #
 # print(p.id)
