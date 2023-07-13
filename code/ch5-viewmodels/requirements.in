@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+aiofiles
+
+# This is now available on PyPI.org, so we'll be using that one going forward.
+fastapi-chameleon
+
+starlette

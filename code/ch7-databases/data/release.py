@@ -1,6 +1,8 @@
 import datetime
+
 import sqlalchemy
 import sqlalchemy.orm as orm
+
 from data.modelbase import SqlAlchemyBase
 
 

@@ -9,6 +9,9 @@ from data.release import Release
 
 class Package(SqlAlchemyBase):
     __tablename__ = 'packages'
+    # For SQLAlchemy 2.0 compatibility
+    # (see https://docs.sqlalchemy.org/en/20/errors.html#error-zlpr)
+    __allow_unmapped__ = True
 
     id: str = sa.Column(sa.String, primary_key=True)
     created_date: datetime.datetime = sa.Column(sa.DateTime, default=datetime.datetime.now, index=True)

@@ -15,8 +15,7 @@ app = fastapi.FastAPI()  # docs_url=None, redoc_url=None)
 
 def main():
     configure(dev_mode=True)
-    # noinspection PyTypeChecker
-    uvicorn.run(app, host='127.0.0.1', port=8000, debug=True)
+    uvicorn.run(app, host='127.0.0.1', port=8000)
 
 
 def configure(dev_mode: bool):
