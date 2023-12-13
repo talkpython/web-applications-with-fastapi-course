@@ -19,5 +19,5 @@ SQLAlchemy
 # We don't really get that with SQLite but when you switch something like Postgres
 # It would "light up" with async. Since recording, SQLAlchemy throws and error
 # if this would be the case. We need to explicitly switch to aiosqlite.
-aiosqlite>
+aiosqlite
 greenlet
