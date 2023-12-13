@@ -8,8 +8,7 @@ from typing import List, Optional, Dict
 import progressbar
 from dateutil.parser import parse
 
-sys.path.insert(0, os.path.abspath(os.path.join(
-    os.path.dirname(__file__), "..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import data.db_session as db_session
 from data.package import Package
@@ -35,14 +34,14 @@ def main():
 def do_summary():
     session = db_session.create_session()
 
-    print("Final numbers:")
-    print("Users: {:,}".format(session.query(User).count()))
-    print("Packages: {:,}".format(session.query(Package).count()))
-    print("Releases: {:,}".format(session.query(Release).count()))
+    print('Final numbers:')
+    print('Users: {:,}'.format(session.query(User).count()))
+    print('Packages: {:,}'.format(session.query(Package).count()))
+    print('Releases: {:,}'.format(session.query(Release).count()))
 
 
 def do_user_import(user_lookup: Dict[str, str]) -> Dict[str, User]:
-    print("Importing users ... ", flush=True)
+    print('Importing users ... ', flush=True)
     with progressbar.ProgressBar(max_value=len(user_lookup)) as bar:
         for idx, (email, name) in enumerate(user_lookup.items()):
             session = db_session.create_session()
@@ -66,29 +65,29 @@ def do_user_import(user_lookup: Dict[str, str]) -> Dict[str, User]:
 
 def do_import_packages(file_data: List[dict], user_lookup: Dict[str, User]):
     errored_packages = []
-    print("Importing packages and releases ... ", flush=True)
+    print('Importing packages and releases ... ', flush=True)
     with progressbar.ProgressBar(max_value=len(file_data)) as bar:
         for idx, p in enumerate(file_data):
             try:
                 load_package(p, user_lookup)
                 bar.update(idx)
             except Exception as x:
-                errored_packages.append((p, " *** Errored out for package {}, {}".format(p.get('package_name'), x)))
+                errored_packages.append((p, ' *** Errored out for package {}, {}'.format(p.get('package_name'), x)))
                 raise
     sys.stderr.flush()
     sys.stdout.flush()
     print()
-    print("Completed packages with {} errors.".format(len(errored_packages)))
-    for (p, txt) in errored_packages:
+    print('Completed packages with {} errors.'.format(len(errored_packages)))
+    for p, txt in errored_packages:
         print(txt)
 
 
 def do_load_files() -> List[dict]:
     data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../data/pypi-top-100'))
-    print("Loading files from {}".format(data_path))
+    print('Loading files from {}'.format(data_path))
     files = get_file_names(data_path)
-    print("Found {:,} files, loading ...".format(len(files)), flush=True)
-    time.sleep(.1)
+    print('Found {:,} files, loading ...'.format(len(files)), flush=True)
+    time.sleep(0.1)
 
     file_data = []
     with progressbar.ProgressBar(max_value=len(files)) as bar:
@@ -103,7 +102,7 @@ def do_load_files() -> List[dict]:
 
 
 def find_users(data: List[dict]) -> dict:
-    print("Discovering users...", flush=True)
+    print('Discovering users...', flush=True)
     found_users = {}
 
     with progressbar.ProgressBar(max_value=len(data)) as bar:
@@ -116,7 +115,7 @@ def find_users(data: List[dict]) -> dict:
     sys.stderr.flush()
     sys.stdout.flush()
     print()
-    print("Discovered {:,} users".format(len(found_users)))
+    print('Discovered {:,} users'.format(len(found_users)))
     print()
 
     return found_users
@@ -147,7 +146,7 @@ def load_file_data(filename: str) -> dict:
         with open(filename, 'r', encoding='utf-8') as fin:
             data = json.load(fin)
     except Exception as x:
-        print("ERROR in file: {}, details: {}".format(filename, x), flush=True)
+        print('ERROR in file: {}, details: {}'.format(filename, x), flush=True)
         raise
 
     return data
@@ -165,7 +164,7 @@ def load_package(data: dict, user_lookup: Dict[str, User]):
         p.author = info.get('author')
         p.author_email = info.get('author_email')
 
-        releases = build_releases(p.id, data.get("releases", {}))
+        releases = build_releases(p.id, data.get('releases', {}))
 
         if releases:
             p.created_date = releases[0].created_date
@@ -206,18 +205,13 @@ def detect_license(license_text: str) -> Optional[str]:
     license_text = license_text.strip()
 
     if len(license_text) > 100 or '\n' in license_text:
-        return "CUSTOM"
+        return 'CUSTOM'
 
-    license_text = license_text \
-        .replace('Software License', '') \
-        .replace('License', '')
+    license_text = license_text.replace('Software License', '').replace('License', '')
 
     if '::' in license_text:
         # E.g. 'License :: OSI Approved :: Apache Software License'
-        return license_text \
-            .split(':')[-1] \
-            .replace('  ', ' ') \
-            .strip()
+        return license_text.split(':')[-1].replace('  ', ' ').strip()
 
     return license_text.strip()
 
@@ -280,9 +274,7 @@ def get_file_names(data_path: str) -> List[str]:
     files = []
     for f in os.listdir(data_path):
         if f.endswith('.json'):
-            files.append(
-                os.path.abspath(os.path.join(data_path, f))
-            )
+            files.append(os.path.abspath(os.path.join(data_path, f)))
 
     files.sort()
     return files

@@ -6,9 +6,7 @@ app = fastapi.FastAPI()
 
 @app.get('/')
 def index():
-    return {
-        'message': "Hello world"
-    }
+    return {'message': 'Hello world'}
 
 
 if __name__ == '__main__':

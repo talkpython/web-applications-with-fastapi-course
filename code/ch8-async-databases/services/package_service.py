@@ -27,11 +27,12 @@ async def package_count() -> int:
 
 async def latest_packages(limit: int = 5) -> List[Package]:
     async with db_session.create_async_session() as session:
-        query = select(Release) \
-            .options(
-            sqlalchemy.orm.joinedload(Release.package)) \
-            .order_by(Release.created_date.desc()) \
+        query = (
+            select(Release)
+            .options(sqlalchemy.orm.joinedload(Release.package))
+            .order_by(Release.created_date.desc())
             .limit(limit)
+        )
 
         results = await session.execute(query)
         releases = results.scalars()
@@ -49,9 +50,7 @@ async def get_package_by_id(package_name: str) -> Optional[Package]:
 
 async def get_latest_release_for_package(package_name: str) -> Optional[Release]:
     async with db_session.create_async_session() as session:
-        query = select(Release) \
-            .filter(Release.package_id == package_name) \
-            .order_by(Release.created_date.desc())
+        query = select(Release).filter(Release.package_id == package_name).order_by(Release.created_date.desc())
 
         results = await session.execute(query)
         release = results.scalar()

@@ -12,7 +12,7 @@ class DetailsViewModel(ViewModelBase):
         super().__init__(request)
 
         self.package_name = package_name
-        self.latest_version = "0.0.0"
+        self.latest_version = '0.0.0'
         self.is_latest = True
         self.maintainers = []
         self.package: Optional[Package] = None

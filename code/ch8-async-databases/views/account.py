@@ -49,6 +49,7 @@ async def register(request: Request):
 
 # ################### LOGIN #################################
 
+
 @router.get('/account/login', include_in_schema=False)
 @template(template_file='account/login.pt')
 def login_get(request: Request):
@@ -68,7 +69,7 @@ async def login_post(request: Request):
     user = await user_service.login_user(vm.email, vm.password)
     if not user:
         await asyncio.sleep(5)
-        vm.error = "The account does not exist or the password is wrong."
+        vm.error = 'The account does not exist or the password is wrong.'
         return vm.to_dict()
 
     resp = fastapi.responses.RedirectResponse('/account', status_code=status.HTTP_302_FOUND)
